@@ -1,1 +1,39 @@
- /* note index */
+.sidebar {
+  padding-block-start: .5em;
+  width: 4em;
+  font-weight: bold;
+
+  &.open {
+    width: 17.5em;
+  }
+
+  .icon-container {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    border-radius: 0 25px 25px 0;
+
+    &.active {
+      width: 100%;
+      background-color: var(--active);
+    }
+
+
+    label {
+      font-size: .875em;
+      line-height: 3rem;
+    }
+
+    &:hover:not(.active) {
+      background-color: var(--hover);
+    }
+  }
+
+
+  .icon {
+    font-size: 1.5em;
+    width: 1.5em;
+    text-align: center;
+    padding-inline: .5em;
+  }
+}
