@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: 'Google Sans', Roboto, sans-serif;
+    /* box-sizing: border-box; */
 }
 
 h1,
