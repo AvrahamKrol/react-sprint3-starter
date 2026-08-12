@@ -1,28 +1,31 @@
-const { useState } = React
-
-const sidebarItems = [
-  { id: 'notes', label: 'Notes', icon: 'fa-regular fa-lightbulb' },
-  { id: 'trash', label: 'Trash', icon: 'fa-solid fa-trash-can' },
-]
+const { NavLink, Outlet } = ReactRouterDOM
 
 export function NoteIndex() {
-  const [selectedSection, setSelectedSection] = useState('notes')
-
   return (
-    <section className="">
-      <section className="sidebar open flex column">
-        {sidebarItems.map((item) => (
-          <div
-            key={item.id}
-            className={`icon-container ${selectedSection === item.id ? 'active' : ''}`}
-            onClick={() => setSelectedSection(item.id)}
-          >
-            <i className={`${item.icon} icon`}></i>
-            <label>{item.label}</label>
-          </div>
-        ))}
+    <section className="note-container">
+      <section className="sidebar flex column">
+        <NavLink
+          to="/note/home"
+          className={({ isActive }) =>
+            `icon-container ${isActive ? 'active' : ''}`
+          }
+        >
+          <i className="fa-regular fa-lightbulb icon"></i>
+          <label>Notes</label>
+        </NavLink>
+        <NavLink
+          to="/note/trash"
+          className={({ isActive }) =>
+            `icon-container ${isActive ? 'active' : ''}`
+          }
+        >
+          <i className="fa-solid fa-trash-can icon"></i>
+          <label>Trash</label>
+        </NavLink>
       </section>
-      <section className="main-container"></section>
+      <section className="main-container">
+        <Outlet />
+      </section>
     </section>
   )
 }
