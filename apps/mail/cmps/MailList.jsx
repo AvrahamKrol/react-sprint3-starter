@@ -1,3 +1,3 @@
 export function MailList() {
-    return <div>Mail list</div>
+    return <ul><li>MailList</li></ul>
 }
