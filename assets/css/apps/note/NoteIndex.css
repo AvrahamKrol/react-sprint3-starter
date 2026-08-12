@@ -1,27 +1,50 @@
+.note-container {
+  display: flex;
+
+}
+
 .sidebar {
   padding-block-start: .5em;
   width: 4em;
   font-weight: bold;
+  transition: width .2s;
+  transition-delay: 0s;
 
-  &.open {
+  .icon-container label {
+    display: none;
+  }
+
+  &:hover {
     width: 17.5em;
+    transition-delay: .35s;
+
+    .icon-container label {
+      display: inline;
+    }
+
+    .icon-container.active {
+      border-radius: 0 25px 25px 0;
+      width: auto;
+    }
+
   }
 
   .icon-container {
     display: flex;
     align-items: center;
     gap: .5em;
+    margin-inline-start: 0.5em;
     border-radius: 0 25px 25px 0;
+    height: 3em;
 
     &.active {
-      width: 100%;
       background-color: var(--active);
+      border-radius: 50%;
+      width: 3em;
     }
-
 
     label {
       font-size: .875em;
-      line-height: 3rem;
     }
 
     &:hover:not(.active) {
@@ -33,7 +56,9 @@
   .icon {
     font-size: 1.5em;
     width: 1.5em;
+    min-width: 1.5em;
     text-align: center;
-    padding-inline: .5em;
+    padding-inline: .25em;
+    justify-content: center;
   }
 }
