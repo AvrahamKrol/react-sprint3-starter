@@ -1,1 +1,36 @@
  /* note list */
+ .notes {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, 240px);
+   grid-auto-flow: dense;
+   gap: 1em;
+   justify-content: center;
+
+   /* width: 100%; */
+   max-width: 1080px;
+   padding-inline: 2em;
+   margin-block: 3em;
+   margin-inline: auto;
+   box-sizing: border-box;
+
+   li {
+     width: 240px;
+     min-height: 3.75em;
+     height: max-content;
+     list-style-type: none;
+
+     display: flex;
+     flex-direction: column;
+
+     background-color: whitesmoke;
+     border-radius: 8px;
+     break-inside: avoid;
+     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+     p {
+       padding-block: 12px;
+       padding-inline: 16px;
+       margin: 0;
+     }
+   }
+ }
