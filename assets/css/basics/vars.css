@@ -6,6 +6,7 @@
     --color1: rgb(26, 115, 232);
     --color2: rgb(24, 128, 56);
     --color3: rgb(197, 34, 31);
+    --color-txt: #000;
 
     --gray2: #aaa;
     --gray2: #888;
@@ -13,4 +14,6 @@
 
     --active: #feefc3;
     --hover: #f2f2f2;
+    --hover-light: rgba(0, 0, 0, .06);
+    --hover-dark: rgba(0, 0, 0, .1);
 }
