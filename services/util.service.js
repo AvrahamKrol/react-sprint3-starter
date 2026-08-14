@@ -128,11 +128,8 @@ function formatDate(timestamp) {
     today.getMonth(),
     today.getDate(),
   )
-  console.log('dateOnly:', dateOnly)
-  console.log('todayOnly:', todayOnly)
 
   const diffDays = Math.round((dateOnly - todayOnly) / (1000 * 60 * 60 * 24))
-  console.log('diffDays:', diffDays)
 
   let formatedDate = ''
   const formatedTime = date.toLocaleTimeString('us-US', {
