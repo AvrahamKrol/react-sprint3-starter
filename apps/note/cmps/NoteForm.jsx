@@ -3,11 +3,14 @@ const { useRef, useEffect } = React
 export const NoteForm = ({
   isEditAddForm = true,
   isShown = false,
-  info,
+  note,
   onChangeVal,
   onOpenForm,
   onSave,
+  onRemove,
 }) => {
+  const isAddForm = onRemove
+  const { info } = note
   const titleAreaRef = useRef()
   const textareaRef = useRef()
 
@@ -40,6 +43,11 @@ export const NoteForm = ({
     onSave()
   }
 
+  function handleRemove(ev, id) {
+    ev.stopPropagation()
+    onRemove(id)
+  }
+
   return (
     <section
       className={`info flex column ${!isShown ? 'info-add' : ''}`}
@@ -69,6 +77,16 @@ export const NoteForm = ({
           onChange={(ev) => onChangeVal(isEditAddForm, 'txt', ev.target.value)}
         ></textarea>
         <section className="note-actions">
+          {isAddForm && (
+            <div className="actions-container">
+              <div
+                className="delete icon-container"
+                onClick={(ev) => handleRemove(ev, note.id)}
+              >
+                <i className="fa-solid fa-trash icon"></i>
+              </div>
+            </div>
+          )}
           <button className="save" type="submit">
             Save
           </button>

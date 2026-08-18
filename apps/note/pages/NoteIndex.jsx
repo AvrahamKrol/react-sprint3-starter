@@ -7,7 +7,7 @@ export function NoteIndex() {
         <NavLink
           to="/note/notes"
           className={({ isActive }) =>
-            `icon-container ${isActive ? 'active' : ''}`
+            `sidebar-icon-container ${isActive ? 'active' : ''}`
           }
         >
           <i className="fa-regular fa-lightbulb icon"></i>
@@ -16,7 +16,7 @@ export function NoteIndex() {
         <NavLink
           to="/note/trash"
           className={({ isActive }) =>
-            `icon-container ${isActive ? 'active' : ''}`
+            `sidebar-icon-container ${isActive ? 'active' : ''}`
           }
         >
           <i className="fa-solid fa-trash-can icon"></i>

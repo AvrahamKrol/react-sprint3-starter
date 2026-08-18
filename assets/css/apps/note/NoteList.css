@@ -1,7 +1,7 @@
  .notes-container {
    max-width: 1080px;
    margin-inline: auto;
-   box-sizing: border-box;
+   ;
 
    padding-inline: 2em;
    width: 100%;
@@ -16,7 +16,7 @@
 
    width: 100%;
    margin-block: 3em;
-   box-sizing: border-box;
+   ;
 
    li {
      width: 240px;
@@ -35,24 +35,24 @@
      break-inside: avoid;
      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
+     padding-block-start: 1.8rem;
+     padding-block-end: 1rem;
+     padding-inline: 1rem;
+
      h2 {
        max-width: 60%;
        overflow-wrap: anywhere;
-       padding-block-start: .75rem;
-       padding-inline-start: 1rem;
      }
 
      p {
-       padding-block: .75rem;
-       padding-inline: 1rem;
        overflow-wrap: anywhere;
        word-break: break-all;
      }
 
      .pin-icon-container {
        position: absolute;
-       right: 12px;
-       top: 8px;
+       right: 1em;
+       top: .5em;
        width: 38px;
        height: 38px;
        display: flex;
@@ -63,14 +63,9 @@
          width: 24px;
          height: 24px;
          color: black;
-         opacity: .3;
 
          transform: rotate(45deg);
          transition: transform .2s ease-out;
-
-         &:active {
-           opacity: 1;
-         }
        }
 
        .pinned {
@@ -96,12 +91,15 @@
 
  .note-actions {
    display: flex;
+   align-items: center;
+   justify-content: space-between;
    padding-block-start: 5px;
+   padding-inline: 1em;
+
 
    .save {
-     margin-inline-start: auto;
      padding: 10px 18px;
-
+     margin-inline-start: auto;
      background-color: transparent;
      border: none;
      font-size: 1.2em;
@@ -135,7 +133,7 @@
      outline: none;
      border: none;
      background-color: inherit;
-     box-sizing: border-box;
+     ;
      width: 100%;
      padding-inline-start: 1rem;
 
@@ -165,4 +163,19 @@
 
  .info-title {
    font-size: 2em;
+ }
+
+ .icon-container {
+   cursor: pointer;
+   opacity: .5;
+   transition: opacity .2s ease-out;
+   display: inline-block;
+
+   &:active {
+     scale: 1.1;
+   }
+
+   &:hover {
+     opacity: 1;
+   }
  }

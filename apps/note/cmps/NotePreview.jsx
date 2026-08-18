@@ -6,12 +6,14 @@ export const NotePreview = ({
   note,
   onChangeNote,
   onSave,
+  onRemove,
 }) => {
   return (
     <DynamicCmp
       cmpType={note.type}
-      info={note.info}
+      note={note}
       onSave={onSave}
+      onRemove={onRemove}
       isEditAddForm={isEditAddForm}
       isShown={isShown}
       onChangeVal={(isEditAddForm, type, val) =>

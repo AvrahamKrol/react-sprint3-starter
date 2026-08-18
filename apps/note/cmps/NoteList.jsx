@@ -68,13 +68,23 @@ export function NoteList() {
     noteService
       .save(updatedNote)
       .then((updatedNote) => {
-        console.log(updatedNote)
         setIsShown(false)
         setNoteToUpdate(noteService.getEmptyNote())
         loadNotes()
         showSuccessMsg(`The note ${updatedNote.id} was successfully updated!`)
       })
-      .catch((err) => showErrorMsg('Sorry, the note was note updated'))
+      .catch((err) => showErrorMsg('Sorry, the note was not updated'))
+  }
+
+  function onRemove(noteId) {
+    noteService
+      .remove(noteId)
+      .then((note) => {
+        setIsShown(false)
+        loadNotes()
+        showSuccessMsg(`The note ${note.id} was successfully removed!`)
+      })
+      .catch((err) => showErrorMsg('Sorry, the note was not deleted'))
   }
 
   function onOpenForm() {
@@ -131,7 +141,7 @@ export function NoteList() {
         }}
       >
         <div
-          className="pin-icon-container"
+          className="pin-icon-container icon-container"
           onClick={(ev) => {
             ev.stopPropagation()
             onChangePin(note)
@@ -141,7 +151,7 @@ export function NoteList() {
             className={`fa-solid fa-thumbtack pin-icon ${note.isPinned ? 'pinned' : ''}`}
           ></i>
         </div>
-        <NotePreview isShown={false} note={note} />
+        <NotePreview isShown={false} note={note} onRemove={onRemove} />
       </li>
     )
   }
@@ -150,10 +160,11 @@ export function NoteList() {
     <Fragment>
       <NoteForm
         isEditAddForm={isEditAddForm}
-        info={noteToAdd.info}
+        note={noteToAdd}
         onChangeVal={onChangeNote}
         onOpenForm={onOpenForm}
         onSave={onSaveAdd}
+        onRemove={false}
       />
 
       {pinnedNotes.length > 0 && (
@@ -181,6 +192,7 @@ export function NoteList() {
           note={noteToUpdate}
           onChangeNote={onChangeNote}
           onSave={onSaveEdit}
+          onRemove={onRemove}
         />
       </Modal>
     </Fragment>
