@@ -5,6 +5,7 @@ export const NotePreview = ({
   isShown,
   note,
   onChangeNote,
+  onChangeColor,
   onSave,
   onRemove,
 }) => {
@@ -19,6 +20,7 @@ export const NotePreview = ({
       onChangeVal={(isEditAddForm, type, val) =>
         onChangeNote(isEditAddForm, type, val)
       }
+      onChangeColor={onChangeColor}
     />
   )
 }

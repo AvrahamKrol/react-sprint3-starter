@@ -1,16 +1,21 @@
-const { useRef, useEffect } = React
+const { Fragment, useRef, useEffect, useState } = React
 
 export const NoteForm = ({
   isEditAddForm = true,
   isShown = false,
   note,
+  bgcColors,
   onChangeVal,
+  onChangeColor,
   onOpenForm,
   onSave,
   onRemove,
 }) => {
+  const [isColorOpen, setIsColorOpen] = useState(false)
+
   const isAddForm = onRemove
   const { info } = note
+
   const titleAreaRef = useRef()
   const textareaRef = useRef()
 
@@ -30,8 +35,6 @@ export const NoteForm = ({
     }, 0)
   }, [isShown, info.title, info.txt])
 
-  useEffect(() => {}, [])
-
   function isOpen() {
     if (isEditAddForm) return isEditAddForm
     if (isShown) return isShown
@@ -46,6 +49,17 @@ export const NoteForm = ({
   function handleRemove(ev, id) {
     ev.stopPropagation()
     onRemove(id)
+  }
+
+  function handleIsOpenColor(ev) {
+    ev.stopPropagation()
+    setIsColorOpen(!isColorOpen)
+  }
+
+  function handleChangeBGC(ev, color) {
+    ev.stopPropagation()
+    onChangeColor(note, color)
+    setIsColorOpen(false)
   }
 
   return (
@@ -78,14 +92,46 @@ export const NoteForm = ({
         ></textarea>
         <section className="note-actions">
           {isAddForm && (
-            <div className="actions-container">
-              <div
-                className="delete icon-container"
-                onClick={(ev) => handleRemove(ev, note.id)}
-              >
-                <i className="fa-solid fa-trash icon"></i>
+            <Fragment>
+              <div className="actions-container">
+                <div
+                  className="icon-container"
+                  onClick={(ev) => handleRemove(ev, note.id)}
+                >
+                  <i className="fa-solid fa-trash icon"></i>
+                </div>
+                <div
+                  className="icon-container"
+                  onClick={(ev) => handleIsOpenColor(ev)}
+                >
+                  <i className="fa-solid fa-paintbrush icon"></i>
+                </div>
               </div>
-            </div>
+              <div
+                className={`color-container ${!isColorOpen ? 'hidden' : ''}`}
+              >
+                <span
+                  className="color-item mint-color"
+                  onClick={(ev) => handleChangeBGC(ev, bgcColors.mint)}
+                ></span>
+                <span
+                  className="color-item sand-color"
+                  onClick={(ev) => handleChangeBGC(ev, bgcColors.sand)}
+                ></span>
+                <span
+                  className="color-item coral-color"
+                  onClick={(ev) => handleChangeBGC(ev, bgcColors.coral)}
+                ></span>
+                <span
+                  className="color-item peach-color"
+                  onClick={(ev) => handleChangeBGC(ev, bgcColors.peach)}
+                ></span>
+                <span
+                  className="color-item gray-color"
+                  onClick={(ev) => handleChangeBGC(ev, bgcColors.gray)}
+                ></span>
+              </div>
+            </Fragment>
           )}
           <button className="save" type="submit">
             Save

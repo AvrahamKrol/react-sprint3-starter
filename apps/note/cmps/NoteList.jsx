@@ -116,11 +116,32 @@ export function NoteList() {
       isPinned: !note.isPinned,
     }
 
-    setNotes((prevNotes) =>
-      prevNotes.map((prevNote) =>
-        prevNote.id === note.id ? updatedNote : prevNote,
-      ),
-    )
+    handleSetNotes(note, updatedNote)
+
+    noteService.save(updatedNote).catch((err) => {
+      showErrorMsg('Could not update pin status')
+      loadNotes()
+    })
+  }
+
+  function onChangeColor(note, color) {
+    const updatedNote = {
+      ...note,
+      style: {
+        ...note.style,
+        backgroundColor: color,
+      },
+    }
+
+    setNoteToUpdate((prevNote) => ({
+      ...prevNote,
+      style: {
+        ...note.style,
+        backgroundColor: color,
+      },
+    }))
+
+    handleSetNotes(note, updatedNote)
 
     noteService.save(updatedNote).catch((err) => {
       showErrorMsg('Could not update pin status')
@@ -135,6 +156,7 @@ export function NoteList() {
     return (
       <li
         key={note.id}
+        style={note.style}
         onClick={() => {
           setNoteToUpdate(note)
           setIsShown(true)
@@ -151,8 +173,21 @@ export function NoteList() {
             className={`fa-solid fa-thumbtack pin-icon ${note.isPinned ? 'pinned' : ''}`}
           ></i>
         </div>
-        <NotePreview isShown={false} note={note} onRemove={onRemove} />
+        <NotePreview
+          isShown={false}
+          note={note}
+          onRemove={onRemove}
+          onChangeColor={onChangeColor}
+        />
       </li>
+    )
+  }
+
+  function handleSetNotes(note, updatedNote) {
+    setNotes((prevNotes) =>
+      prevNotes.map((prevNote) =>
+        prevNote.id === note.id ? updatedNote : prevNote,
+      ),
     )
   }
 
@@ -162,6 +197,7 @@ export function NoteList() {
         isEditAddForm={isEditAddForm}
         note={noteToAdd}
         onChangeVal={onChangeNote}
+        onChangeColor={onChangeColor}
         onOpenForm={onOpenForm}
         onSave={onSaveAdd}
         onRemove={false}
@@ -191,6 +227,7 @@ export function NoteList() {
           isShown={isShown}
           note={noteToUpdate}
           onChangeNote={onChangeNote}
+          onChangeColor={onChangeColor}
           onSave={onSaveEdit}
           onRemove={onRemove}
         />
