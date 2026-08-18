@@ -5,7 +5,7 @@ export function NoteIndex() {
     <main className="main-note">
       <section className="sidebar flex column">
         <NavLink
-          to="/note/home"
+          to="/note/notes"
           className={({ isActive }) =>
             `icon-container ${isActive ? 'active' : ''}`
           }
