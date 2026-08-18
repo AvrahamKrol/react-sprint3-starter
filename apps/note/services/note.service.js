@@ -82,7 +82,6 @@ function save(note) {
 function getEmptyNote() {
   return {
     createdAt: Date.now(),
-    title: '',
     type: 'NoteTxt',
     isPinned: false,
     style: { backgroundColor: '#fff' },
@@ -113,6 +112,6 @@ function _createNote() {
     type: 'NoteTxt',
     isPinned: false,
     style: { backgroundColor: 'whitesmoke' },
-    info: { txt: utilService.makeLorem(17) },
+    info: { title: '', txt: utilService.makeLorem(17) },
   }
 }

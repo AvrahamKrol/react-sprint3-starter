@@ -2,7 +2,7 @@ const { NavLink, Outlet } = ReactRouterDOM
 
 export function NoteIndex() {
   return (
-    <section className="note-container">
+    <main className="main-note">
       <section className="sidebar flex column">
         <NavLink
           to="/note/home"
@@ -26,6 +26,6 @@ export function NoteIndex() {
       <section className="main-container">
         <Outlet />
       </section>
-    </section>
+    </main>
   )
 }
