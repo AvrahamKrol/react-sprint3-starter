@@ -1,3 +1,12 @@
+ .notes-container {
+   max-width: 1080px;
+   margin-inline: auto;
+   ;
+
+   padding-inline: 2em;
+   width: 100%;
+ }
+
  .notes {
    display: grid;
    grid-template-columns: repeat(auto-fill, 240px);
@@ -5,61 +14,70 @@
    gap: 1em;
    justify-content: center;
 
-   max-width: 1080px;
-   padding-inline: 2em;
+   width: 100%;
    margin-block: 3em;
-   margin-inline: auto;
-   box-sizing: border-box;
+   ;
 
    li {
      width: 240px;
      min-height: 3.75em;
      height: max-content;
      list-style-type: none;
+     overflow-wrap: anywhere;
 
      display: flex;
      flex-direction: column;
+
+     position: relative;
 
      background-color: whitesmoke;
      border-radius: 8px;
      break-inside: avoid;
      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
+     padding-block-start: 1.8rem;
+     padding-block-end: 1rem;
+     padding-inline: 1rem;
+
+     h2 {
+       max-width: 60%;
+       overflow-wrap: anywhere;
+     }
+
      p {
-       padding-block: 12px;
-       padding-inline: 16px;
-       margin: 0;
+       overflow-wrap: anywhere;
+       word-break: break-all;
      }
 
-   }
-
-   textarea {
-     min-height: max-content;
-     resize: none;
-     outline: none;
-     border: none;
-     background-color: inherit;
-
-     &::placeholder {
-       color: var(--color-txt)
-     }
-   }
-
-   .info {
-     max-width: 36em;
-     max-height: 80vh;
-     overflow-y: auto;
-
-     width: 35em;
-     max-width: 56em;
-
-     display: flex;
-     flex-direction: column;
-
-
-     .info-textarea {
+     .pin-icon-container {
+       position: absolute;
+       right: 1em;
+       top: .5em;
+       width: 38px;
+       height: 38px;
        display: flex;
-       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+
+       .pin-icon {
+         width: 24px;
+         height: 24px;
+         color: black;
+
+         transform: rotate(45deg);
+         transition: transform .2s ease-out;
+       }
+
+       .pinned {
+         transform: rotate(0);
+       }
+
+       &:hover {
+         background-color: #fff;
+         border-radius: 50%;
+         cursor: pointer;
+       }
+
      }
    }
 
@@ -73,12 +91,20 @@
 
  .note-actions {
    display: flex;
+   align-items: center;
+   justify-content: space-between;
    padding-block-start: 5px;
+   padding-inline: 1em;
+
+   .actions-container {
+     display: flex;
+     align-items: center;
+     gap: .3em;
+   }
 
    .save {
-     margin-inline-start: auto;
      padding: 10px 18px;
-
+     margin-inline-start: auto;
      background-color: transparent;
      border: none;
      font-size: 1.2em;
@@ -92,5 +118,70 @@
      &:active {
        background-color: var(--hover-dark);
      }
+   }
+ }
+
+ .info {
+   max-height: 80%;
+   overflow-y: auto;
+
+   width: 35em;
+   max-width: 56em;
+
+   display: flex;
+   flex-direction: column;
+
+   textarea {
+     min-height: max-content;
+     resize: none;
+     overflow: hidden;
+     outline: none;
+     border: none;
+     background-color: inherit;
+     ;
+     width: 100%;
+     padding-inline-start: 1rem;
+
+     &::placeholder {
+       color: var(--color-txt)
+     }
+   }
+
+
+   .info-textarea {
+     display: flex;
+     flex-direction: column;
+
+   }
+
+ }
+
+ .info-add {
+   margin-inline: auto;
+   margin-block-start: 2em;
+   padding-block: 12px;
+
+   box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+   border: 1px solid #e0e0e0;
+   border-radius: 8px;
+ }
+
+ .info-title {
+   font-size: 2em;
+ }
+
+ .icon-container {
+   position: relative;
+   cursor: pointer;
+   opacity: .5;
+   transition: opacity .2s ease-out;
+   display: inline-block;
+
+   &:active {
+     scale: 1.1;
+   }
+
+   &:hover {
+     opacity: 1;
    }
  }

@@ -1,16 +1,26 @@
 import { NoteText } from './NoteText.jsx'
 
-export const NotePreview = ({ isShown, note, onChangeNote, onClose }) => {
-  console.log('note:', note)
+export const NotePreview = ({
+  isEditAddForm,
+  isShown,
+  note,
+  onChangeNote,
+  onChangeColor,
+  onSave,
+  onRemove,
+}) => {
   return (
     <DynamicCmp
-      // key={note.id}
       cmpType={note.type}
-      info={note.info}
-      onClose={onClose}
+      note={note}
+      onSave={onSave}
+      onRemove={onRemove}
+      isEditAddForm={isEditAddForm}
       isShown={isShown}
-      // val={answersMap[note.id] || ''}
-      onChangeVal={(type, val) => onChangeNote(type, val)}
+      onChangeVal={(isEditAddForm, type, val) =>
+        onChangeNote(isEditAddForm, type, val)
+      }
+      onChangeColor={onChangeColor}
     />
   )
 }

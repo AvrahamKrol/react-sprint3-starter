@@ -1,59 +1,94 @@
-const { Fragment, useRef, useEffect } = React
+const { Fragment, useState } = React
 
-export const NoteText = ({ isShown, info, onChangeVal, onClose }) => {
-  const titleAreaRef = useRef()
-  const textareaRef = useRef()
+import { NoteForm } from './NoteForm.jsx'
 
-  useEffect(() => {
-    if (isShown && textareaRef.current) {
-      textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
-    }
+const bgcColors = {
+  sand: '#fff8b8',
+  coral: '#faafa8',
+  mint: '#e2f6d3',
+  gray: '#aeccdc',
+  peach: '#f39f76',
+}
 
-    if (isShown && titleAreaRef.current) {
-      titleAreaRef.current.style.height = 'auto'
-      titleAreaRef.current.style.height = `${titleAreaRef.current.scrollHeight}px`
-    }
-  }, [isShown, info])
+export const NoteText = ({
+  isEditAddForm,
+  isShown,
+  note,
+  onChangeVal,
+  onSave,
+  onRemove,
+  onChangeColor,
+}) => {
+  const [isColorOpen, setIsColorOpen] = useState(false)
 
-  function onSave() {
-    onClose()
+  function handleRemove(ev, id) {
+    ev.stopPropagation()
+    onRemove(id)
   }
+
+  function handleIsOpenColor(ev) {
+    ev.stopPropagation()
+    setIsColorOpen(!isColorOpen)
+  }
+
+  function handleChangeBGC(ev, color) {
+    ev.stopPropagation()
+    onChangeColor(note, color)
+    setIsColorOpen(false)
+  }
+
   return (
     <Fragment>
       {isShown ? (
-        <section className="info flex column">
-          <form className="info-textarea">
-            <textarea
-              ref={titleAreaRef}
-              name="note-title"
-              id="title"
-              placeholder="Title"
-              value={info.title || ''}
-              onChange={(ev) => onChangeVal('title', ev.target.value)}
-            ></textarea>
-            <textarea
-              ref={textareaRef}
-              name="note-txt"
-              id="txt"
-              placeholder="Note"
-              value={info.txt || ''}
-              onChange={(ev) => onChangeVal('txt', ev.target.value)}
-            ></textarea>
-          </form>
-          {/* <div className="time">{utilService.formatDate(note.createdAt)}</div> */}
-        </section>
+        <NoteForm
+          isEditAddForm={isEditAddForm}
+          isShown={isShown}
+          note={note}
+          bgcColors={bgcColors}
+          onChangeVal={onChangeVal}
+          onChangeColor={onChangeColor}
+          onSave={onSave}
+          onRemove={onRemove}
+        />
       ) : (
-        <Fragment>
-          <h2>{info.title}</h2>
-          <p>{info.txt}</p>
-        </Fragment>
+        <div>
+          <h2>{note.info.title}</h2>
+          <p>{note.info.txt}</p>
+          <div className="actions-container">
+            <div
+              className="icon-container"
+              onClick={(ev) => handleRemove(ev, note.id)}
+            >
+              <i className="fa-solid fa-trash icon"></i>
+            </div>
+            <div className="icon-container" onClick={handleIsOpenColor}>
+              <i className="fa-solid fa-paintbrush icon"></i>
+            </div>
+            <div className={`color-container ${!isColorOpen ? 'hidden' : ''}`}>
+              <span
+                className="color-item mint-color"
+                onClick={(ev) => handleChangeBGC(ev, bgcColors.mint)}
+              ></span>
+              <span
+                className="color-item sand-color"
+                onClick={(ev) => handleChangeBGC(ev, bgcColors.sand)}
+              ></span>
+              <span
+                className="color-item coral-color"
+                onClick={(ev) => handleChangeBGC(ev, bgcColors.coral)}
+              ></span>
+              <span
+                className="color-item peach-color"
+                onClick={(ev) => handleChangeBGC(ev, bgcColors.peach)}
+              ></span>
+              <span
+                className="color-item gray-color"
+                onClick={(ev) => handleChangeBGC(ev, bgcColors.gray)}
+              ></span>
+            </div>
+          </div>
+        </div>
       )}
-      <section className="note-actions">
-        <button className="save" onClick={onSave}>
-          Save
-        </button>
-      </section>
     </Fragment>
   )
 }

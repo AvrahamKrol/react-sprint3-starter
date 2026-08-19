@@ -2,12 +2,12 @@ const { NavLink, Outlet } = ReactRouterDOM
 
 export function NoteIndex() {
   return (
-    <section className="note-container">
+    <main className="main-note">
       <section className="sidebar flex column">
         <NavLink
-          to="/note/home"
+          to="/note/notes"
           className={({ isActive }) =>
-            `icon-container ${isActive ? 'active' : ''}`
+            `sidebar-icon-container ${isActive ? 'active' : ''}`
           }
         >
           <i className="fa-regular fa-lightbulb icon"></i>
@@ -16,7 +16,7 @@ export function NoteIndex() {
         <NavLink
           to="/note/trash"
           className={({ isActive }) =>
-            `icon-container ${isActive ? 'active' : ''}`
+            `sidebar-icon-container ${isActive ? 'active' : ''}`
           }
         >
           <i className="fa-solid fa-trash-can icon"></i>
@@ -26,6 +26,6 @@ export function NoteIndex() {
       <section className="main-container">
         <Outlet />
       </section>
-    </section>
+    </main>
   )
 }
