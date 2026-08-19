@@ -133,20 +133,32 @@ export function NoteList() {
       },
     }
 
-    setNoteToUpdate((prevNote) => ({
-      ...prevNote,
-      style: {
-        ...note.style,
-        backgroundColor: color,
-      },
-    }))
-
     handleSetNotes(note, updatedNote)
 
     noteService.save(updatedNote).catch((err) => {
       showErrorMsg('Could not update pin status')
       loadNotes()
     })
+  }
+
+  function onChangeAddColor(color) {
+    setNoteToAdd((prevNote) => ({
+      ...prevNote,
+      style: {
+        ...prevNote.style,
+        backgroundColor: color,
+      },
+    }))
+  }
+
+  function onChangeEditColor(color) {
+    setNoteToUpdate((prevNote) => ({
+      ...prevNote,
+      style: {
+        ...prevNote.style,
+        backgroundColor: color,
+      },
+    }))
   }
 
   const pinnedNotes = notes.filter((note) => note.isPinned)
@@ -177,7 +189,7 @@ export function NoteList() {
           isShown={false}
           note={note}
           onRemove={onRemove}
-          onChangeColor={onChangeColor}
+          onChangeColor={(color) => onChangeColor(note, color)}
         />
       </li>
     )
@@ -197,7 +209,7 @@ export function NoteList() {
         isEditAddForm={isEditAddForm}
         note={noteToAdd}
         onChangeVal={onChangeNote}
-        onChangeColor={onChangeColor}
+        onChangeColor={onChangeAddColor}
         onOpenForm={onOpenForm}
         onSave={onSaveAdd}
         onRemove={false}
@@ -227,7 +239,7 @@ export function NoteList() {
           isShown={isShown}
           note={noteToUpdate}
           onChangeNote={onChangeNote}
-          onChangeColor={onChangeColor}
+          onChangeColor={onChangeEditColor}
           onSave={onSaveEdit}
           onRemove={onRemove}
         />

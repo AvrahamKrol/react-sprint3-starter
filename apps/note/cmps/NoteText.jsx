@@ -33,7 +33,7 @@ export const NoteText = ({
 
   function handleChangeBGC(ev, color) {
     ev.stopPropagation()
-    onChangeColor(note, color)
+    onChangeColor(color)
     setIsColorOpen(false)
   }
 

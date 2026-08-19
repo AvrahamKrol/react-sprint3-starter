@@ -58,7 +58,7 @@ export const NoteForm = ({
 
   function handleChangeBGC(ev, color) {
     ev.stopPropagation()
-    onChangeColor(note, color)
+    onChangeColor(color)
     setIsColorOpen(false)
   }
 
@@ -133,9 +133,11 @@ export const NoteForm = ({
               </div>
             </Fragment>
           )}
-          <button className="save" type="submit">
-            Save
-          </button>
+          {isOpen() && (
+            <button className="save" type="submit">
+              Save
+            </button>
+          )}
         </section>
       </form>
       {/* <div className="time">{utilService.formatDate(note.createdAt)}</div> */}
