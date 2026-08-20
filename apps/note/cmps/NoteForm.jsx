@@ -10,6 +10,7 @@ export const NoteForm = ({
   onOpenForm,
   onSave,
   onRemove,
+  onClose,
 }) => {
   const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -19,13 +20,6 @@ export const NoteForm = ({
   const titleAreaRef = useRef()
   const textareaRef = useRef()
 
-  function resizeTextArea(textarea) {
-    if (!textarea) return
-
-    textarea.style.height = 'auto'
-    textarea.style.height = `${textarea.scrollHeight}px`
-  }
-
   useEffect(() => {
     if (!isShown) return
 
@@ -34,6 +28,31 @@ export const NoteForm = ({
       resizeTextArea(textareaRef.current)
     }, 0)
   }, [isShown, info.title, info.txt])
+
+  const formContainerRef = useRef(null)
+  useEffect(() => {
+    if (!isShown) return
+
+    function handleClickOutside(ev) {
+      if (
+        formContainerRef.current &&
+        !formContainerRef.current.contains(ev.target)
+      )
+        if (onClose) onClose()
+    }
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [isShown, onClose])
+
+  function resizeTextArea(textarea) {
+    if (!textarea) return
+
+    textarea.style.height = 'auto'
+    textarea.style.height = `${textarea.scrollHeight}px`
+  }
 
   function isOpen() {
     if (isEditAddForm) return isEditAddForm
@@ -64,10 +83,15 @@ export const NoteForm = ({
 
   return (
     <section
+      ref={formContainerRef}
       className={`info flex column ${!isShown ? 'info-add' : ''}`}
       onClick={onOpenForm}
     >
-      <form className="info-textarea" onSubmit={handleSave}>
+      <form
+        // ref={formContainerRef}
+        className="info-textarea"
+        onSubmit={handleSave}
+      >
         {isOpen() && (
           <textarea
             ref={titleAreaRef}

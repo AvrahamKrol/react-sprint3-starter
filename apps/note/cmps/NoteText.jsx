@@ -15,9 +15,10 @@ export const NoteText = ({
   isShown,
   note,
   onChangeVal,
+  onChangeColor,
   onSave,
   onRemove,
-  onChangeColor,
+  onClose,
 }) => {
   const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -49,6 +50,7 @@ export const NoteText = ({
           onChangeColor={onChangeColor}
           onSave={onSave}
           onRemove={onRemove}
+          onClose={onClose}
         />
       ) : (
         <div>
