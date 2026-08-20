@@ -122,23 +122,17 @@
  }
 
  .info {
-   max-height: 80%;
-   overflow-y: auto;
-
-   width: 35em;
-   max-width: 56em;
-
+   position: relative;
    display: flex;
    flex-direction: column;
+   width: 35em;
 
    textarea {
-     min-height: max-content;
      resize: none;
      overflow: hidden;
      outline: none;
      border: none;
      background-color: inherit;
-     ;
      width: 100%;
      padding-inline-start: 1rem;
 
