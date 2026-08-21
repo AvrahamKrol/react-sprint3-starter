@@ -1,4 +1,5 @@
 const { Fragment, useState, useEffect } = React
+const { useOutletContext } = ReactRouterDOM
 
 import { noteService } from '../services/note.service.js'
 import { NotePreview } from './NotePreview.jsx'
@@ -10,15 +11,12 @@ import {
 } from '../../../services/event-bus.service.js'
 
 export function NoteList() {
-  const [notes, setNotes] = useState([])
+  const { notes, setNotes, loadNotes, onRemove } = useOutletContext()
   const [noteToUpdate, setNoteToUpdate] = useState(noteService.getEmptyNote())
   const [noteToAdd, setNoteToAdd] = useState(noteService.getEmptyNote())
   const [isShown, setIsShown] = useState(false)
   const [isEditAddForm, setIsEditAddForm] = useState(false)
 
-  useEffect(() => {
-    loadNotes()
-  }, [])
   useEffect(() => {
     if (!isEditAddForm) return
 
@@ -30,12 +28,6 @@ export function NoteList() {
 
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isEditAddForm])
-
-  function loadNotes() {
-    noteService.query().then((notes) => {
-      setNotes(notes)
-    })
-  }
 
   function onSaveAdd() {
     if (!noteToAdd.info.title && !noteToAdd.info.txt) {
@@ -74,17 +66,6 @@ export function NoteList() {
         showSuccessMsg(`The note ${updatedNote.id} was successfully updated!`)
       })
       .catch((err) => showErrorMsg('Sorry, the note was not updated'))
-  }
-
-  function onRemove(noteId) {
-    noteService
-      .remove(noteId)
-      .then((note) => {
-        setIsShown(false)
-        loadNotes()
-        showSuccessMsg(`The note ${note.id} was successfully removed!`)
-      })
-      .catch((err) => showErrorMsg('Sorry, the note was not deleted'))
   }
 
   function onOpenForm() {

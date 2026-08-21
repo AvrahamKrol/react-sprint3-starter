@@ -7,6 +7,7 @@ export const noteService = {
   remove,
   save,
   getEmptyNote,
+  getDefaultFilter,
 }
 
 const NOTE_KEY = 'noteDB'
@@ -57,8 +58,14 @@ const mock_notes = [
 
 _createNotes()
 
-function query(filterBy = {}) {
+function query(filterBy = { txt: '' }) {
   return storageService.query(NOTE_KEY).then((notes) => {
+    if (filterBy.txt) {
+      const regex = new RegExp(filterBy.txt, 'i')
+      notes = notes.filter(
+        (note) => regex.test(note.info.title) || regex.test(note.info.txt),
+      )
+    }
     return notes
   })
 }
@@ -87,6 +94,10 @@ function getEmptyNote() {
     style: { backgroundColor: '#fff' },
     info: { txt: '', title: '' },
   }
+}
+
+function getDefaultFilter() {
+  return { txt: '' }
 }
 
 function _createNotes() {

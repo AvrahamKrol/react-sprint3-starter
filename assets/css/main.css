@@ -10,6 +10,7 @@
 @import './apps/note/NoteIndex.css';
 @import './apps/note/NoteList.css';
 @import './apps/note/NoteText.css';
+@import './apps/note/NoteFilter.css';
 @import './apps/note/Modal.css';
 @import './apps/mail/MailIndex.css';
 @import './apps/mail/MailList.css';

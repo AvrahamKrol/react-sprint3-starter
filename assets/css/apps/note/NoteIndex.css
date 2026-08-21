@@ -11,7 +11,8 @@
   transition: width .2s;
   transition-delay: 0;
 
-  &:hover {
+  &:hover,
+  &.active {
     width: 17.5em;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     transition-delay: .35s;
