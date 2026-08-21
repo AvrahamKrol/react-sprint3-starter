@@ -1,1 +1,19 @@
- /* mail list */
+/* Styles all odd rows (1st, 3rd, 5th, etc.) */
+li {
+    list-style-type: none;
+}
+
+li:nth-child(odd) {
+    display: flex;
+    background-color: #ffffff;
+    padding-block: .5em;
+    font-size: large;
+}
+
+/* Styles all even rows (2nd, 4th, 6th, etc.) */
+li:nth-child(even) {
+    display: flex;
+    background-color: #f2f6fc;
+    padding-block: .5em;
+    font-size: large;
+}
