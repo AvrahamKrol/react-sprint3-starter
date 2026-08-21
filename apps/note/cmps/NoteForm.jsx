@@ -10,7 +10,7 @@ export const NoteForm = ({
   onOpenForm,
   onSave,
   onRemove,
-  onClose,
+  onCloseEditAddForm,
 }) => {
   const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -30,22 +30,23 @@ export const NoteForm = ({
   }, [isShown, info.title, info.txt])
 
   const formContainerRef = useRef(null)
+
   useEffect(() => {
-    if (!isShown) return
+    if (!isEditAddForm) return
 
     function handleClickOutside(ev) {
       if (
         formContainerRef.current &&
         !formContainerRef.current.contains(ev.target)
       )
-        if (onClose) onClose()
+        if (onCloseEditAddForm) onCloseEditAddForm()
     }
     document.addEventListener('click', handleClickOutside)
 
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
-  }, [isShown, onClose])
+  }, [isEditAddForm, onCloseEditAddForm])
 
   function resizeTextArea(textarea) {
     if (!textarea) return

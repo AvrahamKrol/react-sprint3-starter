@@ -95,6 +95,10 @@ export function NoteList() {
     setIsShown(false)
   }
 
+  function onCloseEditAddForm() {
+    setIsEditAddForm(false)
+  }
+
   function onChangeNote(isEditAddForm, type, val) {
     if (!isEditAddForm) {
       setNoteToUpdate((prevNote) => ({
@@ -213,6 +217,7 @@ export function NoteList() {
         onOpenForm={onOpenForm}
         onSave={onSaveAdd}
         onRemove={false}
+        onCloseEditAddForm={onCloseEditAddForm}
       />
 
       {pinnedNotes.length > 0 && (
