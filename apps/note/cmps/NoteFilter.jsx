@@ -10,7 +10,10 @@ export function NoteFilter({ filterBy, onSetFilterBy, onToggleSidebar }) {
           <i className="fa-solid fa-bars brand-icon"></i>
         </button>
         <div className="brand-container flex">
-          <img className="" src={'/apps/note/imgs/logo_keep.png'} alt="logo" />
+          <img
+            src="/react-sprint3-starter/assets/imgs/logo_keep.png"
+            alt="logo"
+          />
           <span>Keep</span>
         </div>
       </div>
