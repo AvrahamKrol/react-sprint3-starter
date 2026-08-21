@@ -3,13 +3,13 @@
 
 }
 
-.sidebar {
+.mail-index .sidebar {
     width: 17.5em;
     font-size: 1.5em;
     padding: 1em;
 }
 
-.active {
+.mail-index .active {
     background-color: #0b97d0;
     width: 100%;
     display: inline-block;
@@ -17,8 +17,6 @@
     border-radius: 0 25px 25px 0;
 }
 
-label {}
-
-.gmail-logo {
+.mail-index .gmail-logo {
     width: 100px;
 }
